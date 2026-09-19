@@ -129,6 +129,39 @@ python -m raiz query YOUR_ZIP_CODE --demo --actions
 python -m raiz query YOUR_ZIP_CODE --airnow-key YOUR_KEY --actions
 ```
 
+### The Dreamer (optional, and yours to schedule)
+
+Raíz ships a **dreamer** — a background cycle that tends the organisation's
+memory: consolidating what has been learned across queries, surfacing patterns
+no single query shows, and letting old noise fade. It is in
+`raiz/memory/dreamer.py` and it is **not wired to a schedule, deliberately.**
+
+The dreamer's whole value is its rhythm, and the right rhythm depends on how your
+organisation works. A group running a permit watchdog over one county wants
+something different from a coalition tracking twelve. So the schedule is yours to
+set rather than ours to assume.
+
+To enable it, call the dreamer cycle from whatever scheduler you already use —
+cron, systemd timer, a task queue:
+
+```bash
+# once a night, after the day's queries have landed
+0 2 * * *  cd /path/to/Project-Raiz && python -c "
+from raiz.memory.dreamer import DreamerConfig
+# configure and run one cycle — see the module docstring for options
+"
+```
+
+**What it needs:** nothing beyond the standard install. The dreamer uses four
+Kintsugi modules that are vendored in `kintsugi_vendor/`, so it works on a bare
+deployment. If you have a Project-Kintsugi checkout, set `KINTSUGI_PATH` and it
+will use that instead — `raiz.kintsugi_core.KINTSUGI_SOURCE` reports which copy
+loaded.
+
+**If you do not schedule it, nothing breaks.** Raíz's queries, disparity
+analysis, permit watchdog and FOIA automation all work without it. The dreamer
+only improves what Raíz remembers between them.
+
 ### API Keys (all free)
 
 | Source | Key Required? | Where to Get It |

@@ -22,7 +22,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from typing import Any, Callable, Awaitable
 
-from kintsugi.cognition.proactive_advisor import (
+from raiz.kintsugi_core import (
     ProactiveAdvisor,
     ActivityRecord,
     Suggestion,
@@ -179,7 +179,7 @@ class Dreamer:
         if not memories:
             return 0
 
-        from kintsugi.memory.cma_stage1 import AtomicFact
+        from raiz.kintsugi_core import AtomicFact
         facts = []
         for mem in memories:
             facts.append(AtomicFact(

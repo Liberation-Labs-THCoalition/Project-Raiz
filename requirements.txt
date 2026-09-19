@@ -1,0 +1,17 @@
+# Raíz runtime dependencies.
+
+aiohttp>=3.9          # all async HTTP source fetching (EPA, AirNow, Census)
+numpy>=1.26           # needed by the vendored Kintsugi memory modules, not by
+                      # Raíz directly — see kintsugi_vendor/README.md
+
+# Optional. sec_edgar.py imports it lazily and falls back to dry-run mode with a
+# clear log line if it is absent, so corporate-accountability lookups degrade
+# rather than crash. Install it if you want real SEC filings.
+# edgartools
+
+# Kintsugi is deliberately NOT listed. Raíz needs four stdlib+numpy modules from
+# it; the kintsugi-engine package declares 23 dependencies including FastAPI,
+# uvicorn, SQLAlchemy, asyncpg, celery+redis and sentence-transformers. Those
+# four modules are vendored verbatim in kintsugi_vendor/ and loaded through
+# raiz/kintsugi_core.py, which prefers a real checkout (KINTSUGI_PATH) or an
+# installed package whenever either is available.
