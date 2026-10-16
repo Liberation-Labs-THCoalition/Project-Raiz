@@ -26,6 +26,8 @@ trade. Checked, not assumed: see the import lists in each file.
 
 ## Refreshing
 
+**Licence.** These files are Project-Kintsugi's and stay under its terms: its `LICENSE.md` (Hippocratic License 3.0, Liberation Labs) and `LICENSE-COMMERCIAL-ADDENDUM.md`. They are byte-identical to Kintsugi's public main (checked 2026-10-15).
+
 These are verbatim. To update, re-copy from canonical and bump the commit hash
 above — do not hand-edit. `raiz/kintsugi_core.py` prefers a real checkout
 (`KINTSUGI_PATH`) or an installed package over this copy, so a dev box runs
