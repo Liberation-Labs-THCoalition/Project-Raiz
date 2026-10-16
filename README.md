@@ -129,6 +129,12 @@ python -m raiz query YOUR_ZIP_CODE --demo --actions
 python -m raiz query YOUR_ZIP_CODE --airnow-key YOUR_KEY --actions
 ```
 
+**Where this stands (alpha).** Demo mode runs end to end on invented data. The clients for EPA ECHO, TRI, AirNow,
+PurpleAir, SEC EDGAR and the Census are written but haven't yet been run against the live services, so expect rough
+edges on real data, and please report what breaks. The risk score is a hand-weighted 0 to 10 sum that hasn't been
+validated against outcomes yet. Ownership tracing takes the first ticker a name search returns, and doesn't follow
+subsidiaries.
+
 ### The Dreamer (optional, and yours to schedule)
 
 Raíz ships a **dreamer** — a background cycle that tends the organisation's
