@@ -85,7 +85,8 @@ Numbers that make the invisible visible.
 
 ## The Permit Watchdog
 
-Raíz watches for new environmental permits near communities you care about. When one appears:
+**This is the design, and most of it isn't built yet.** The aim: Raíz watches for new environmental permits near
+communities you care about, and when one appears it:
 
 1. **Catches it** — new permit application detected within 3 miles
 2. **Investigates** — pulls the applicant's violation history across all their facilities
@@ -95,6 +96,12 @@ Raíz watches for new environmental permits near communities you care about. Whe
 6. **Tracks the clock** — comment deadline countdown
 
 The community doesn't have to find the permit. The permit finds the community.
+
+**What the code does today** (`raiz/pulse/watchdog.py`): nothing in Raíz feeds it permits or runs it on a schedule,
+because there is no permit source yet (the state permit scrapers are under What's Next). Given permit records, it
+flags each one inside a watch zone's radius (3 miles by default), counts the days left to comment, lists recommended
+actions, and can draft a public comment. Steps 2 to 4 aren't wired into the alert yet; the ZIP-code query does related
+lookups (violations, demographics, SEC filings) on its own.
 
 ---
 
@@ -165,8 +172,9 @@ will use that instead — `raiz.kintsugi_core.KINTSUGI_SOURCE` reports which cop
 loaded.
 
 **If you do not schedule it, nothing breaks.** Raíz's queries, disparity
-analysis, permit watchdog and FOIA automation all work without it. The dreamer
-only improves what Raíz remembers between them.
+analysis and FOIA automation all work without it, and so does the permit
+watchdog's matching (which nothing feeds or schedules yet; see above). The
+dreamer only improves what Raíz remembers between them.
 
 ### API Keys (all free)
 
@@ -215,7 +223,7 @@ Raíz Phase 1 is a query tool — you ask, it answers. Phase 2 makes it an agent
 
 ## Built With
 
-Raíz stands on the shoulders of [EDGI](https://github.com/edgi-govdata-archiving) (Environmental Data & Governance Initiative), whose open source tools for EPA data access made this possible. Built on the [Kintsugi Engine](https://github.com/Liberation-Labs-THCoalition/Project-Kintsugi) by [Liberation Labs / TH Coalition](https://github.com/Liberation-Labs-THCoalition).
+Raíz stands on the shoulders of [EDGI](https://github.com/edgi-govdata-archiving) (Environmental Data & Governance Initiative), whose open source tools for EPA data access made this possible. Designed alongside the [Kintsugi Engine](https://github.com/Liberation-Labs-THCoalition/Project-Kintsugi) by [Liberation Labs / TH Coalition](https://github.com/Liberation-Labs-THCoalition). Only the dreamer uses Kintsugi code: four of its modules, vendored in `kintsugi_vendor/`. The ZIP-code query doesn't use Kintsugi, and nothing outside the tests calls the other Kintsugi-derived modules in `raiz/engine/`, `raiz/skills/`, `raiz/security/` and `raiz/cognition/`.
 
 ---
 

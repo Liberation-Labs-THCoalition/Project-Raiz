@@ -85,7 +85,8 @@ Numeros que hacen visible lo invisible.
 
 ## El vigilante de permisos
 
-Raiz vigila nuevos permisos ambientales cerca de las comunidades que te importan. Cuando aparece uno:
+**Este es el diseno, y casi todo esta por construir.** La idea: Raiz vigila nuevos permisos ambientales cerca de las
+comunidades que te importan, y cuando aparece uno:
 
 1. **Lo detecta** -- nueva solicitud de permiso detectada dentro de 3 millas
 2. **Investiga** -- obtiene el historial de violaciones del solicitante en todas sus instalaciones
@@ -95,6 +96,13 @@ Raiz vigila nuevos permisos ambientales cerca de las comunidades que te importan
 6. **Vigila el plazo** -- cuenta regresiva para la fecha limite de comentarios
 
 La comunidad no tiene que buscar el permiso. El permiso encuentra a la comunidad.
+
+**Lo que hace el codigo hoy** (`raiz/pulse/watchdog.py`): nada en Raiz le entrega permisos ni lo ejecuta con un
+horario, porque todavia no hay una fuente de permisos (los rastreadores de permisos estatales estan en Lo que viene).
+Si recibe registros de permisos, marca cada uno que cae dentro del radio de una zona vigilada (3 millas por defecto),
+cuenta los dias que quedan para comentar, sugiere acciones y puede redactar un comentario publico. Los pasos 2 a 4
+todavia no forman parte de la alerta; la consulta por codigo postal hace busquedas parecidas (violaciones, datos
+demograficos, documentos de la SEC) por su cuenta.
 
 ---
 
@@ -176,7 +184,7 @@ La Fase 1 de Raiz es una herramienta de consulta -- preguntas y te responde. La 
 
 ## Construido con
 
-Raiz se apoya en el trabajo de [EDGI](https://github.com/edgi-govdata-archiving) (Environmental Data & Governance Initiative), cuyas herramientas de codigo abierto para acceder a datos de la EPA hicieron esto posible. Construido sobre el [Kintsugi Engine](https://github.com/Liberation-Labs-THCoalition/Project-Kintsugi) por [Liberation Labs / TH Coalition](https://github.com/Liberation-Labs-THCoalition).
+Raiz se apoya en el trabajo de [EDGI](https://github.com/edgi-govdata-archiving) (Environmental Data & Governance Initiative), cuyas herramientas de codigo abierto para acceder a datos de la EPA hicieron esto posible. Disenado junto al [Kintsugi Engine](https://github.com/Liberation-Labs-THCoalition/Project-Kintsugi) de [Liberation Labs / TH Coalition](https://github.com/Liberation-Labs-THCoalition). Solo el dreamer usa codigo de Kintsugi: cuatro de sus modulos, copiados en `kintsugi_vendor/`. La consulta por codigo postal no usa Kintsugi, y fuera de las pruebas nada llama a los otros modulos derivados de Kintsugi en `raiz/engine/`, `raiz/skills/`, `raiz/security/` y `raiz/cognition/`.
 
 ---
 

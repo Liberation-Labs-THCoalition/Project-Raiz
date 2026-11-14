@@ -2,7 +2,7 @@
 
 ## What Is Raíz
 
-Raíz (*raíz* — Spanish for root) is an AI environmental justice agent built on the Kintsugi Engine. It connects fragmented environmental data sources into a unified intelligence layer that serves communities, activists, and environmental lawyers.
+Raíz (*raíz* — Spanish for root) is an AI environmental justice agent, designed alongside the Kintsugi Engine (only its dreamer uses Kintsugi code today; see Architecture). It connects fragmented environmental data sources into a unified intelligence layer that serves communities, activists, and environmental lawyers.
 
 The roots see what the surface hides.
 
@@ -10,7 +10,9 @@ In February 2025, the federal government removed EJSCREEN and CEJST — the two 
 
 ## Architecture
 
-Built on Kintsugi Engine primitives:
+Designed around Kintsugi Engine primitives; the list and the diagram below are the design, not what runs. Today only
+the dreamer (`raiz/memory/dreamer.py`) uses Kintsugi code, through four modules vendored in `kintsugi_vendor/`, and
+nothing runs the permit watchdog on a schedule (there is no permit source yet). The design:
 - **Pulse** — watchdog heartbeat: permit monitoring, violation checks, air quality alerts
 - **BDI** — beliefs about environmental conditions, desires for justice, active investigation intentions
 - **EFE** — risk-weighted decisions (which leads to pursue, when to alert, confidence thresholds)
@@ -34,12 +36,12 @@ Data Sources                    Intelligence              Action
 
 ```
 raiz/
-  sources/       Data source connectors (EPA, SEC, AirNow, state permits)
+  sources/       Data source connectors (EPA ECHO and TRI, SEC EDGAR, AirNow; no state permits yet)
   analysis/      Environmental justice analysis, violation prediction
   community/     Community-facing outputs (alerts, fact sheets, comments)
   investigation/ Lead scoring, corporate accountability, FOIA automation
   mapping/       GIS integration, demographic overlay, facility mapping
-  pulse/         Watchdog configuration, monitoring schedules
+  pulse/         Permit watchdog: matching permits to watch zones (nothing feeds or schedules it yet)
 config/          VALUES.json, data source credentials
 tests/           Test suite
 docs/            Architecture, regulatory notes, org onboarding
