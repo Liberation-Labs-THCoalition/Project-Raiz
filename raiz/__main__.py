@@ -42,6 +42,17 @@ def main() -> None:
         print("  python -m raiz query 62701 --demo    # See what Raíz finds")
 
 
+DEMO_BANNER = (
+    "*** DEMO: INVENTED DATA ***\n"
+    "No source was contacted. The facilities, companies, numbers and demographics below are made up, "
+    "come from a few fixed examples (the same facilities and companies whatever zip code you give), "
+    "and are not about {zip} or anywhere real.\n")
+
+DEMO_FOOTER = (
+    "*** DEMO: INVENTED DATA. The 'Data sources' line above names where real data would come from; "
+    "none was used. Nothing here describes {zip}. ***")
+
+
 async def run_query(args) -> None:
     from raiz.community.query import CommunityQueryEngine
 
@@ -52,7 +63,10 @@ async def run_query(args) -> None:
     )
 
     print(f"\nRaíz — investigating zip code {args.zip_code}...")
-    print("Querying EPA ECHO, TRI, AirNow, PurpleAir...\n")
+    if args.demo:
+        print(DEMO_BANNER.format(zip=args.zip_code))
+    else:
+        print("Querying EPA ECHO, TRI, AirNow, PurpleAir...\n")
 
     report = await engine.query(args.zip_code)
     print(report.summarize())
@@ -63,6 +77,8 @@ async def run_query(args) -> None:
         for i, action in enumerate(actions, 1):
             print(f"  {i}. {action}")
 
+    if args.demo:
+        print("\n" + DEMO_FOOTER.format(zip=args.zip_code))
     print()
 
 

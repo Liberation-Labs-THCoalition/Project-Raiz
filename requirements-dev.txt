@@ -1,0 +1,3 @@
+# For running the tests: python -m pip install -r requirements.txt -r requirements-dev.txt
+pytest
+pytest-asyncio   # the async tests are marked @pytest.mark.asyncio and are not collected without it
